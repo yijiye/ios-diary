@@ -78,9 +78,9 @@ Diary
 # 실행 화면
 
 |<center>DiaryListVC -> DiaryDetailVC<br>상단 plus버튼클릭이동</center>|<center>DiaryListVC -> DiaryDetailVC<br>cell 클릭시 이동</center>|
-|:----:|:----:|
-| <img src = "https://i.imgur.com/E1yQLsF.gif" width = 300>| <img src = "https://i.imgur.com/pywOO9u.gif" width = 300>|
-상단 plus버튼 클릭시 DetailVC로 이동하며, 키보드는 자동으로 띄워집니다.| cell클릭시 DetailVC로 이동하며, 키보드는 화면을 클릭했을때 반응해 띄워지며, 키보드 상단 `Done` 버튼을 통해 키보드를 다시 내려줄 수 있습니다. |
+|:------:|:----:|
+| <img src = "https://i.imgur.com/E1yQLsF.gif" width = 200>| <img src = "https://i.imgur.com/pywOO9u.gif" width = 200>|
+상단 plus버튼 클릭시 DetailVC로 이동하며, 키보드는 자동으로 띄워집니다.| cell클릭시 DetailVC로 이동하며, 키보드는 화면을 클릭했을때 띄워집니다.|
 
 
 <br/>
@@ -216,7 +216,8 @@ When the user taps in an editable text view, that text view becomes the first re
 
 ### 🔍 문제점
 DiaryDetailViewController로 이동시 첫화면에서 TextView 상단이 아래사진과 같이 잘리는 현상이 발생했습니다. Autolayout을 정상적으로 잡았음에도 잘리는 현상이 발생했습니다.
-<img src ="https://i.imgur.com/R4Sok34.png" width=30%>
+</br>
+<img src ="https://i.imgur.com/R4Sok34.png" width=200>
 
 ### 🛠️ 해결방법
 ```swift!
