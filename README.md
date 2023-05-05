@@ -97,14 +97,14 @@ Diary
 
 |<center>DiaryListVC -> DiaryDetailVC<br>상단 plus버튼클릭이동</center>|<center>DiaryListVC -> DiaryDetailVC<br>cell 클릭시 이동</center>|<center>DiaryDetailVC<br>(createMode, editMode)</center>|
 | -- | -- | -- |
-| <img src = "https://i.imgur.com/E1yQLsF.gif" width= 250, height= 400> |<img src = "https://i.imgur.com/pywOO9u.gif" width= 250, height= 400> |<img src = "https://i.imgur.com/HVoXHps.gif" width= 250, height= 400> |
-상단 plus버튼 클릭시 DetailVC로 이동하며, 키보드는 자동으로 띄워집니다.|cell클릭시 DetailVC로 이동하며, 키보드는 화면을 클릭했을때 반응해 띄워지며, 키보드 상단 `Done` 버튼을 통해 키보드를 다시 내려줄 수 있습니다. |detailVC에서 일기를 편집후에 ListVC로 돌아와 다시 셀을 클릭해 detailVC 이동시 일기를 편집할 수 있는 화면입니다.|
+|<img src="https://i.imgur.com/E1yQLsF.gif" width= 200>|<img src="https://i.imgur.com/pywOO9u.gif" width= 200>|<img src="https://i.imgur.com/HVoXHps.gif" width= 200>|
+상단 plus버튼 클릭시 DetailVC로 이동하며, 키보드는 자동으로 띄워집니다. 작성한 일기는 CoreData에 자동으로 저장됩니다.|cell클릭시 DetailVC로 이동하며, 키보드는 화면을 클릭했을때 반응해 띄워지며, 키보드 상단 `Done` 버튼을 통해 키보드를 다시 내려줄 수 있습니다.|detailVC에서 일기를 편집후에 ListVC로 돌아와 다시 셀을 클릭해 detailVC 이동시 일기를 편집할 수 있는 화면입니다.|
 
 <br/>
 
 |<center>ActivityView</center>|<center>Error Alert</center>|<center>Delete</center>|
 | -- | -- | -- |
-| <img src = "https://i.imgur.com/24nMigy.gif" width= 250, height= 400> |<img src = "https://i.imgur.com/eCEWTQw.gif" width= 250, height= 400> |<img src = "https://i.imgur.com/0bFhA9V.gif" width= 250, height= 400> |
+| <img src = "https://i.imgur.com/24nMigy.gif" width=200> |<img src = "https://i.imgur.com/eCEWTQw.gif" width=200> |<img src = "https://i.imgur.com/0bFhA9V.gif" width=200> |
 셀을 `swipe`했을 때 `share`버튼 또는 detailVC의 우측상단버튼을 통해 ActivityView(공유)를 띄워줄 수 있습니다.|내용이 없는 상태에서 일기를 저장 혹은 공유하려고 할때 `ErrorAlert`을 띄워주는 화면을 구현했습니다. |셀을 `swipe`해서 `delete`버튼 클릭시 셀과 코어데이터, 즉 일기가 삭제되는 기능을 구현했습니다.|
 
 
@@ -241,7 +241,8 @@ When the user taps in an editable text view, that text view becomes the first re
 
 ### 🔍 문제점
 DiaryDetailViewController로 이동시 첫화면에서 TextView 상단이 아래사진과 같이 잘리는 현상이 발생했습니다. Autolayout을 정상적으로 잡았음에도 잘리는 현상이 발생했습니다.
-<img src ="https://i.imgur.com/R4Sok34.png" width=30%>
+
+<img src ="https://i.imgur.com/R4Sok34.png" width=200>
 
 ### 🛠️ 해결방법
 ```swift!
@@ -526,5 +527,4 @@ UIEdgeInsets에 값을 주어 View에 Stackview를 위치시킬 때 어느정도
 - [AppleDevelopment - UITextViewDelegate](https://developer.apple.com/documentation/uikit/uitextviewdelegate)
 - [AppleDevelopment - CoreData](https://developer.apple.com/documentation/coredata)
 - [AppleDevelopmet - willdeactivatenotification](https://developer.apple.com/documentation/uikit/uiscene/3197924-willdeactivatenotification)
-- [AppleDevelopmet - ActivityViewController]
-(https://developer.apple.com/documentation/uikit/uiactivityviewcontroller)
+- [AppleDevelopmet - ActivityViewController](https://developer.apple.com/documentation/uikit/uiactivityviewcontroller)
