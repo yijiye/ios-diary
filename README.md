@@ -97,14 +97,14 @@ Diary
 
 |<center>DiaryListVC -> DiaryDetailVC<br>상단 plus버튼클릭이동</center>|<center>DiaryListVC -> DiaryDetailVC<br>cell 클릭시 이동</center>|<center>DiaryDetailVC<br>(createMode, editMode)</center>|
 | -- | -- | -- |
-| <img src = "https://i.imgur.com/E1yQLsF.gif" height= 400> |<img src = "https://i.imgur.com/pywOO9u.gif" height = 400> |<img src = "https://i.imgur.com/HVoXHps.gif" height = 400> |
+| <img src = "https://i.imgur.com/E1yQLsF.gif" width= 250, height= 400> |<img src = "https://i.imgur.com/pywOO9u.gif" width= 250, height= 400> |<img src = "https://i.imgur.com/HVoXHps.gif" width= 250, height= 400> |
 상단 plus버튼 클릭시 DetailVC로 이동하며, 키보드는 자동으로 띄워집니다.|cell클릭시 DetailVC로 이동하며, 키보드는 화면을 클릭했을때 반응해 띄워지며, 키보드 상단 `Done` 버튼을 통해 키보드를 다시 내려줄 수 있습니다. |detailVC에서 일기를 편집후에 ListVC로 돌아와 다시 셀을 클릭해 detailVC 이동시 일기를 편집할 수 있는 화면입니다.|
 
 <br/>
 
 |<center>ActivityView</center>|<center>Error Alert</center>|<center>Delete</center>|
 | -- | -- | -- |
-| <img src = "https://i.imgur.com/24nMigy.gif" height= 400> |<img src = "https://i.imgur.com/eCEWTQw.gif" height = 400> |<img src = "https://i.imgur.com/0bFhA9V.gif" height = 400> |
+| <img src = "https://i.imgur.com/24nMigy.gif" width= 250, height= 400> |<img src = "https://i.imgur.com/eCEWTQw.gif" width= 250, height= 400> |<img src = "https://i.imgur.com/0bFhA9V.gif" width= 250, height= 400> |
 셀을 `swipe`했을 때 `share`버튼 또는 detailVC의 우측상단버튼을 통해 ActivityView(공유)를 띄워줄 수 있습니다.|내용이 없는 상태에서 일기를 저장 혹은 공유하려고 할때 `ErrorAlert`을 띄워주는 화면을 구현했습니다. |셀을 `swipe`해서 `delete`버튼 클릭시 셀과 코어데이터, 즉 일기가 삭제되는 기능을 구현했습니다.|
 
 
