@@ -1,10 +1,8 @@
 # README
-
 # 일기장 :notebook: 
-
 > 일기를 작성,수정,저장할 수 있는 일기장 앱 구현
 > 
-> 프로젝트 기간: 2023.04.24-2023.04.28
+> 프로젝트 기간: 2023.04.24-2023.05.05
 > 
 
 ## 팀원
@@ -25,16 +23,26 @@
 
 # 타임라인 
 
-### PARTI
+### week1
 
 |    날짜    | 내용 |
 |:----:| ---- |
 | 2023.04.24 | JSON객체 생성 및 DiaryTalebleViewCell 구현, DateFormatterManager 구현|
-| 2023.04.25 | textView, keyboard 구현 및 notificationCenter로 키보드 textView 가리지않게 설정|
+| 2023.04.25 | TextView, keyboard 구현 및 NotificationCenter로 키보드 TextView 가리지않게 설정|
 | 2023.04.26 | autolayout 정리|
 | 2023.04.27 | keyboarad dismiss button 구현, DiaryListVC -> DiaryDetailVC로 데이터 이동 구현|
 | 2023.04.28 | CoreDataManager - CRUD 구현,  README작성|
 
+
+### week2
+
+|    날짜    | 내용 |
+|:----:| ---- |
+| 2023.05.01 | TextField 구현|
+| 2023.05.02 | keyboard Done 버튼, CoreData 구현, CoreData 자동저장 기능추가|
+| 2023.05.03 | ActivityView, TextField -> TextView로 수정|
+| 2023.05.04 | AlertManager 구현, 빈 화면 로직 수정 및 알림 기능 추가 |
+| 2023.05.05 | README 작성|
 
 <br/>
 
@@ -44,43 +52,60 @@
 ## File Tree
 ```typescript
 Diary
-├── Diary+CoreDataClass
-├── Diary+CoreDataProperties
-├── Diary.xcdatamodeld
 ├── .swiftlint
+├── DiaryCoreData
+│   ├── Diary+CoreDataClass
+│   ├── Diary+CoreDataProperties
+│   ├── Diary.xcdatamodeld
+│   └── CoreDataManager.swift
 ├── Diary
 │   ├── Model
+│   │   ├── DiaryProtocol.swift
+│   │   ├── MyDiary.swift
+│   │   └── DiaryError.swift
+│   ├── JSON
 │   │   ├── SampleDiary.swift
-│   │   ├── Decoder.swift
+│   │   └── Decoder.swift
+│   ├── Manager
 │   │   ├── DateFormatterManager.swift
-│   │   └── CoreDataManager.swift
+│   │   └── AlertManager.swift
 │   ├── View
 │   │   ├── DiaryTableViewCell.swift
 │   │   └── extension + UITextView.swift
 │   ├── ViewController
 │   │   ├── DiaryListViewController.swift
 │   │   └── DiaryDetailViewController.swift
-│   ├── AppDelegate.swift
-│   ├── SceneDelegate.swift
+│   ├── Application
+│   │   ├── AppDelegate.swift
+│   │   ├── LaunchScreen
+│   │   └── SceneDelegate.swift
 │   ├── Assets.xcassets
-│   ├── LaunchScreen
 │   ├── Info.plist
-│   │   └── Assets.xcassets
 ├── DiaryTests
 │   ├── DiaryTests.swift
 ├── CoreDataManagerTest
 └─  └── CoreDataManagerTest.swift 
+
 ```
+![]()
 
 
- <br/>  
+ <br/>
 
 # 실행 화면
 
-|<center>DiaryListVC -> DiaryDetailVC<br>상단 plus버튼클릭이동</center>|<center>DiaryListVC -> DiaryDetailVC<br>cell 클릭시 이동</center>|
-|:------:|:----:|
-| <img src = "https://i.imgur.com/E1yQLsF.gif" width = 200>| <img src = "https://i.imgur.com/pywOO9u.gif" width = 200>|
-상단 plus버튼 클릭시 DetailVC로 이동하며, 키보드는 자동으로 띄워집니다.| cell클릭시 DetailVC로 이동하며, 키보드는 화면을 클릭했을때 띄워집니다.|
+
+|<center>DiaryListVC -> DiaryDetailVC<br>상단 plus버튼클릭이동</center>|<center>DiaryListVC -> DiaryDetailVC<br>cell 클릭시 이동</center>|<center>DiaryDetailVC<br>(createMode, editMode)</center>|
+| -- | -- | -- |
+| <img src = "https://i.imgur.com/E1yQLsF.gif" height= 400> |<img src = "https://i.imgur.com/pywOO9u.gif" height = 400> |<img src = "https://i.imgur.com/HVoXHps.gif" height = 400> |
+상단 plus버튼 클릭시 DetailVC로 이동하며, 키보드는 자동으로 띄워집니다.|cell클릭시 DetailVC로 이동하며, 키보드는 화면을 클릭했을때 반응해 띄워지며, 키보드 상단 `Done` 버튼을 통해 키보드를 다시 내려줄 수 있습니다. |detailVC에서 일기를 편집후에 ListVC로 돌아와 다시 셀을 클릭해 detailVC 이동시 일기를 편집할 수 있는 화면입니다.|
+
+<br/>
+
+|<center>ActivityView</center>|<center>Error Alert</center>|<center>Delete</center>|
+| -- | -- | -- |
+| <img src = "https://i.imgur.com/24nMigy.gif" height= 400> |<img src = "https://i.imgur.com/eCEWTQw.gif" height = 400> |<img src = "https://i.imgur.com/0bFhA9V.gif" height = 400> |
+셀을 `swipe`했을 때 `share`버튼 또는 detailVC의 우측상단버튼을 통해 ActivityView(공유)를 띄워줄 수 있습니다.|내용이 없는 상태에서 일기를 저장 혹은 공유하려고 할때 `ErrorAlert`을 띄워주는 화면을 구현했습니다. |셀을 `swipe`해서 `delete`버튼 클릭시 셀과 코어데이터, 즉 일기가 삭제되는 기능을 구현했습니다.|
 
 
 <br/>
@@ -216,8 +241,7 @@ When the user taps in an editable text view, that text view becomes the first re
 
 ### 🔍 문제점
 DiaryDetailViewController로 이동시 첫화면에서 TextView 상단이 아래사진과 같이 잘리는 현상이 발생했습니다. Autolayout을 정상적으로 잡았음에도 잘리는 현상이 발생했습니다.
-</br>
-<img src ="https://i.imgur.com/R4Sok34.png" width=200>
+<img src ="https://i.imgur.com/R4Sok34.png" width=30%>
 
 ### 🛠️ 해결방법
 ```swift!
@@ -229,10 +253,28 @@ Scollview에도 적용되며, Scrollview의 성격을 갖고있는 TextView에�
 
 <br>
 
+## 5️⃣ 첫 번째 줄, 나머지 줄 title, body로 나누기
+
+### 🔍 문제점
+
+처음엔 타이틀과 바디를 각각 `textField`와 `textView`로 구현을 하였으나, 명세에 "textView의 첫 번째 줄이 title, 나머지가 body가 되도록 한다는 내용"이 있어 하나의 `textView`로 묶어주고 아래와 같이 title, body로 나뉘게끔 분기처리를 하였습니다.
+
+### 🛠️ 해결방법
+
+```swift
+  func textViewDidChange(_ textView: UITextView) {
+        guard let text = diaryTextView.text else { return }
+        self.titleText = text.components(separatedBy: "\n").first
+        self.bodyText = text.replacingOccurrences(of: "\(String(describing: titleText)) \n", with: "")
+    }
+    
+```
+띄어쓰기를 기준으로 나눠 first 값은 title이 되고, title이 된 부분을 ""으로 바꾼 text가 body가 되도록 구현하였습니다.
+
 # 핵심경험
 
 <details>
-<summary><big>✅ TextView, TextField 시스템 제공 키보드 옵션 - InputAccessaryView</big></summary> 
+<summary><big>✅ TextView, TextField Keyboard - InputAccessaryView</big></summary> 
 
 <img src ="https://i.imgur.com/S8JSaxt.png" width=30%>
 
@@ -259,8 +301,191 @@ extension UITextView {
 * 위와같이 코드 구현시 text가 fisrtResponder가 된다면 `UITextField, UITextView` 의 시스템제공 키보드에 악세사리 뷰를 연결하면 키보드 상단에 AccessaryView가 구현되는 것을 발견할 수 있습니다.
 </details>
 
-</br>
 
+
+<details>
+<summary><big>✅ CoreData </big></summary> 
+ 
+이번 프로젝트에서 작성한 일기를 CoreData에 저장하여 관리하였습니다. 이때 CoreData를 적용하면서 배운 핵심경험에는 크게 3가지가 있습니다.
+    
+- CRUD 구현
+Create, Read, Update, Delete기능을 구현하고 선택적 삭제와 업데이트를 위해 `NSPredicate`를 활용하였습니다. 
+    
+<details>
+<summary>코드확인하기</summary> 
+    
+```swift
+import Foundation
+import CoreData
+import UIKit
+
+final class CoreDataManager {
+    static let shared = CoreDataManager()
+    private init() { }
+    
+    private let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.newBackgroundContext()
+    
+    func create(diary: DiaryProtocol) {
+        guard let context = self.context,
+              let entity = NSEntityDescription.entity(forEntityName: "DiaryCoreData", in: context),
+              let storage = NSManagedObject(entity: entity, insertInto: self.context) as? DiaryCoreData else { return }
+        
+        setValue(at: storage, diary: diary)
+        save()
+    }
+    
+    func readAll() -> [DiaryCoreData]? {
+        guard let context = self.context else { return nil }
+        
+        do {
+            let data = try context.fetch(DiaryCoreData.fetchRequest())
+            return data
+        } catch {
+            return nil
+        }
+    }
+    
+    func read(key: String) -> DiaryCoreData? {
+        guard let context = self.context else { return nil }
+        let filter = filteredDataRequest(key: key)
+        
+        do {
+            let data = try context.fetch(filter)
+            return data.first as? DiaryCoreData
+        } catch {
+            return nil
+        }
+    }
+    
+    func update(key: String, diary: DiaryProtocol) {
+        guard let fetchedData = read(key: key) else { return }
+        
+        setValue(at: fetchedData, diary: diary)
+        save()
+    }
+    
+    func deleteAll() {
+        guard let context = self.context else { return }
+        
+        let request: NSFetchRequest<NSFetchRequestResult> = DiaryCoreData.fetchRequest()
+        let delete = NSBatchDeleteRequest(fetchRequest: request)
+        
+        do {
+            try context.execute(delete)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func delete(key: String) {
+        guard let context = self.context else { return }
+        
+        let request: NSFetchRequest<NSFetchRequestResult> = DiaryCoreData.fetchRequest()
+        request.predicate = NSPredicate(format: "title == %@", key)
+        let delete = NSBatchDeleteRequest(fetchRequest: request)
+        
+        do {
+            try context.execute(delete)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    private func filteredDataRequest(key: String) -> NSFetchRequest<NSManagedObject> {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "DiaryCoreData")
+        fetchRequest.predicate = NSPredicate(format: "title == %@", key)
+        
+        return fetchRequest
+    }
+    
+    private func setValue(at target: DiaryCoreData, diary: DiaryProtocol) {
+        target.setValue(diary.title, forKey: "title")
+        target.setValue(diary.body, forKey: "body")
+        target.setValue(diary.createdDate, forKey: "date")
+    }
+    
+    private func save() {
+        guard let context = self.context else { return }
+        
+        do {
+            try context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+}
+
+```
+</details>
+
+    
+- 자동저장하는 3가지 경우 설정하기
+   - 사용자가 입력을 멈추는 경우 : UITextViewDelegate의 메서드인 `textViewDidEndEditing(: )`에 저장하도록 하여 TextView의 입력리 멈추는 순간마다 저장하도록 하였습니다.
+    ```swift
+    func textViewDidEndEditing(_ textView: UITextView) {
+        saveDiary()
+    ```
+    
+   - 앱이 백그라운드로 이동하는 경우 : UIScene.willDeactivateNotification 을 활용하여 앱이 사라지는 것을 알려 저장되도록 하였습니다.
+    
+    ```swift
+    private func setUpBackgroundNotification() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(saveDiary),
+            name: UIScene.willDeactivateNotification,
+            object: nil
+        )
+    }
+    ```
+    - 이전 화면을 돌아오는 경우 : 이전 화면으로 돌아갈 때 반드시 2가지 방법 중 1개를 거쳐야 하므로 자동으로 저장이 되는 것을 확인하였습니다.
+    
+- CoreData 저장위치확인
+
+<img src="https://i.imgur.com/qzx6Ppu.png" width="400">
+
+
+
+저희는 scheme에 위와 같은 argument를 추가하여 CoreData 저장위치를 확인하였습니다. Tool을 이용하여 확인해보니 Application/Support에 저장되어있어 파일 위치를 변경하지 않았습니다.
+
+<img src="https://i.imgur.com/pvVdObz.png" width="400">
+</details>
+    
+    
+<details>
+<summary><big>✅ UISwipeActionsConfiguration </big></summary> 
+    
+table의 row를 스와이핑 할 때 수행하는 액션의 set으로 유저가 tableView의 cell을 왼쪽에서 오른쪽 또는 오른쪽에서 왼쪽으로 쓸어넘길 때, 버튼을 띄워 액션을 취할 수 있습니다.
+
+`UITableViewDelegate`에서 
+`tableView(_:leadingSwipeActionsConfigurationForRowAt:)`
+`tableView(_:trailingSwipeActionsConfigurationForRowAt:)`를 활용할 수 있고, 앞쪽에 달고싶다면 leading, 뒤쪽에 달고싶다면 trailing을 사용하면 됩니다. 저희는 뒤쪽에 달기 위해 trailing을 사용하여 구현했습니다.
+
+**코드**
+
+```swift
+func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    guard let diary = myDiary,
+          let title = diary[indexPath.row].title,
+          let body = diary[indexPath.row].body else { return UISwipeActionsConfiguration() }
+        
+    let share = UIContextualAction(style: .normal, title: "공유") { [weak self] (_, _, success: @escaping (Bool) -> Void) in
+        ...
+        }
+    share.backgroundColor = .systemTeal
+        
+    let delete = UIContextualAction(style: .normal, title: "삭제") { [weak self] (_, _, success: @escaping (Bool) -> Void) in
+            
+        success(true)
+    }
+    delete.backgroundColor = .systemPink
+        
+    return UISwipeActionsConfiguration(actions: [share, delete])
+}
+```   
+</details>
+    
+    
 <details>
 <summary><big>✅ StackView-layoutMargins</big></summary> 
 TableViewCell에 넣는 요소를 StackView에 넣어 Autolayout을 잡았습니다. 이때 StackView의 Autolayout을 safeArea로 잡는 방법도 있지만 이 자체의 layoutMargins 을 이용하여 잡을 수 있는 방법을 학습하여 적용해보았습니다.
@@ -288,11 +513,18 @@ UIEdgeInsets에 값을 주어 View에 Stackview를 위치시킬 때 어느정도
 # 참고 링크
 ## 블로그
 - [StackView layoutMargin](https://velog.io/@dvhuni/UIStackView-Margin-적용하기)
+- [CoreData Zedd](https://zeddios.tistory.com/987)
             
 ## 공식 문서
-- [Dateformatter](https://developer.apple.com/documentation/foundation/dateformatter)
-- [UITextview](https://developer.apple.com/documentation/uikit/uitextview)
-- [UIStackView](https://developer.apple.com/documentation/uikit/uistackview)
-- [isLayoutMarginsRelativeArrangement](https://developer.apple.com/documentation/uikit/uistackview/1616220-islayoutmarginsrelativearrangeme)
-- [Locale](https://developer.apple.com/documentation/foundation/locale)
-- [contentInset](https://developer.apple.com/documentation/uikit/uiscrollview/1619406-contentinset)
+- [AppleDevelopment - Dateformatter](https://developer.apple.com/documentation/foundation/dateformatter)
+- [AppleDevelopment - UITextview](https://developer.apple.com/documentation/uikit/uitextview)
+- [AppleDevelopment - UIStackView](https://developer.apple.com/documentation/uikit/uistackview)
+- [AppleDevelopment - isLayoutMarginsRelativeArrangement](https://developer.apple.com/documentation/uikit/uistackview/1616220-islayoutmarginsrelativearrangeme)
+- [AppleDevelopment - Locale](https://developer.apple.com/documentation/foundation/locale)
+- [AppleDevelopment - contentInset](https://developer.apple.com/documentation/uikit/uiscrollview/1619406-contentinset)
+- [AppleDevelopment - UISwipeActionsConfiguration](https://developer.apple.com/documentation/uikit/uiswipeactionsconfiguration)
+- [AppleDevelopment - UITextViewDelegate](https://developer.apple.com/documentation/uikit/uitextviewdelegate)
+- [AppleDevelopment - CoreData](https://developer.apple.com/documentation/coredata)
+- [AppleDevelopmet - willdeactivatenotification](https://developer.apple.com/documentation/uikit/uiscene/3197924-willdeactivatenotification)
+- [AppleDevelopmet - ActivityViewController]
+(https://developer.apple.com/documentation/uikit/uiactivityviewcontroller)
