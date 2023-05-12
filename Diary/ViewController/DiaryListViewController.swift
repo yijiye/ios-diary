@@ -8,15 +8,28 @@ import UIKit
 
 final class DiaryListViewController: UIViewController {
     private let diaryTableView: UITableView = UITableView()
+    private let searchController = UISearchController(searchResultsController: nil)
+    
     private var myDiary: [DiaryCoreData]?
+    private var filteredDiary: [DiaryCoreData] = []
     private var weatherIcon: [String: UIImage] = [:]
+    
     private let group = DispatchGroup()
+    
+    private var isFiltering: Bool {
+        let searchController = self.navigationItem.searchController
+        let isActive = searchController?.isActive ?? false
+        let isSearchBarHasText = searchController?.searchBar.text?.isEmpty == false
+        
+        return isActive && isSearchBarHasText
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpLayout()
         setUpView()
+        configureSearchController()
         configureNavigationBar()
     }
     
@@ -78,6 +91,16 @@ final class DiaryListViewController: UIViewController {
         diaryTableView.delegate = self
     }
     
+    // MARK: SearchController
+    private func configureSearchController() {
+        searchController.searchBar.placeholder = "검색"
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchResultsUpdater = self
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
     // MARK: NavigationBar
     private func configureNavigationBar() {
         navigationItem.title = "일기장"
@@ -108,20 +131,42 @@ extension DiaryListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let sampleDiary = myDiary else { return 0 }
         
-        return sampleDiary.count
+        return isFiltering ? filteredDiary.count : sampleDiary.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let diaryCell: DiaryTableViewCell = tableView.dequeueReusableCell(withIdentifier: DiaryTableViewCell.identifier) as? DiaryTableViewCell,
               let myDiary = myDiary else { return UITableViewCell() }
-        
-        if let icon = myDiary[indexPath.row].icon,
-           let iconImage = weatherIcon[icon] {
-            diaryCell.setupItem(item: myDiary[indexPath.row], iconImage: iconImage)
+    
+        if isFiltering {
+            sendfilteredDiary(to: diaryCell, item: myDiary, indexPath: indexPath)
         } else {
-            diaryCell.setupItem(item: myDiary[indexPath.row], iconImage: nil)
+            sendMyDiary(to: diaryCell, item: myDiary, indexPath: indexPath)
         }
         return diaryCell
+    }
+    
+    private func sendfilteredDiary(to cell: DiaryTableViewCell, item: [DiaryCoreData], indexPath: IndexPath) {
+        let image = setUpIconImage(item: item, indexPath: indexPath)
+        cell.setupItem(item: filteredDiary[indexPath.row], iconImage: image)
+    }
+    
+    private func sendMyDiary(to cell: DiaryTableViewCell, item: [DiaryCoreData], indexPath: IndexPath) {
+        let image = setUpIconImage(item: item, indexPath: indexPath)
+        cell.setupItem(item: item[indexPath.row], iconImage: image)
+    }
+    
+    private func setUpIconImage(item: [DiaryCoreData], indexPath: IndexPath) -> UIImage? {
+        var image: UIImage?
+        
+        if let icon = item[indexPath.row].icon,
+           let iconImage = weatherIcon[icon] {
+            image = iconImage
+        } else {
+           image = nil
+        }
+        
+        return image
     }
 }
 
@@ -165,5 +210,20 @@ extension DiaryListViewController: UITableViewDelegate {
         delete.backgroundColor = .systemPink
         
         return UISwipeActionsConfiguration(actions: [share, delete])
+    }
+}
+
+extension DiaryListViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text,
+              let myDiary = self.myDiary else { return }
+        
+        self.filteredDiary = myDiary.filter {
+            guard let title = $0.title,
+                  let body = $0.body else { return false }
+            return title.localizedCaseInsensitiveContains(text) || body.localizedCaseInsensitiveContains(text)
+        }
+        
+        self.diaryTableView.reloadData()
     }
 }
