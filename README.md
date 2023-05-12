@@ -125,7 +125,7 @@ Diary
 
 |<center>7. 위치정보 및 허용안함 알림 </center>|<center>8. 날씨 저장</center>|<center>9. 검색기능</center>|
 |:---:|:---:|:---:|
-| <img src = "https://hackmd.io/_uploads/BkSGhb9E2.gif" width="250"> |<img src = "https://hackmd.io/_uploads/rk-Kw8sE3.gif" width= 80%> |<img src="https://hackmd.io/_uploads/HymaQIoE3.gif" width=80%> |
+| <img src = "https://hackmd.io/_uploads/BkSGhb9E2.gif" width=250> |<img src = "https://hackmd.io/_uploads/rk-Kw8sE3.gif" width= 250> |<img src="https://hackmd.io/_uploads/HymaQIoE3.gif" width=250> |
 
 
 
