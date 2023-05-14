@@ -125,7 +125,7 @@ Diary
 
 |<center>7. 위치정보 및 허용안함 알림 </center>|<center>8. 날씨 저장</center>|<center>9. 검색기능</center>|
 |:---:|:---:|:---:|
-| <img src = "https://hackmd.io/_uploads/BkSGhb9E2.gif" width=250> |<img src = "https://hackmd.io/_uploads/rk-Kw8sE3.gif" width= 250> |<img src="https://hackmd.io/_uploads/HymaQIoE3.gif" width=250> |
+| <img src = "https://hackmd.io/_uploads/BkSGhb9E2.gif" width=250> |<img src = "https://github.com/yijiye/ios-diary/assets/114971172/aad104d4-ee82-465e-8fa6-84fd569257b6" width= 250> |<img src="https://github.com/yijiye/ios-diary/assets/114971172/92140b33-74dd-4732-9c85-f11dbe2ede1f" width=250> |
 
 
 
