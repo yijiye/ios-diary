@@ -29,10 +29,17 @@ final class CoreDataManagerTests: XCTestCase {
     func test_create매서드_성공시_read매서드호출결과는_nil이_아니다() {
         // given
         guard let firstSampleDiary = sampleDiary.first else { return }
+<<<<<<< Updated upstream
         sut.create(diary: firstSampleDiary)
         
         // when
         let result = sut.read(key: firstSampleDiary.title)
+=======
+        sut.create(diary: firstSampleDiary as! DiaryProtocol)
+        
+        // when
+        let result = sut.read(key: firstSampleDiary.)
+>>>>>>> Stashed changes
 
         // then
         XCTAssertNotNil(result)
