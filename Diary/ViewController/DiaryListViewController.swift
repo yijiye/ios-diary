@@ -15,6 +15,7 @@ final class DiaryListViewController: UIViewController {
     private var weatherIcon: [String: UIImage] = [:]
     
     private let group = DispatchGroup()
+    private let networkManager = NetworkManager()
     
     private var isFiltering: Bool {
         let searchController = self.navigationItem.searchController
@@ -56,7 +57,7 @@ final class DiaryListViewController: UIViewController {
     private func fetchWeatherIcon(icon: String) {
         group.enter()
         let weatherEndpoint = WeatherEndpoint.weatherIcon(icon: icon)
-        NetworkManager.shared.imageLoad(endPoint: weatherEndpoint) { [self] in
+        networkManager.imageLoad(endPoint: weatherEndpoint) { [self] in
             switch $0 {
             case .failure(let error):
                 DispatchQueue.main.async {

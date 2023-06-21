@@ -25,6 +25,8 @@
 		FB17B91E29FA5556007236A2 /* DiaryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB17B91D29FA5555007236A2 /* DiaryDetailViewController.swift */; };
 		FB17B92029FA5A0A007236A2 /* extension + UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB17B91F29FA5A0A007236A2 /* extension + UITextView.swift */; };
 		FB3C3CC12A42BF6500A8B0E0 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C3CC02A42BF6500A8B0E0 /* CoreDataManagerTests.swift */; };
+		FB3C3CC32A42C0E900A8B0E0 /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C3CC22A42C0E800A8B0E0 /* MockURLProtocol.swift */; };
+		FB3C3CC52A42C1C400A8B0E0 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB3C3CC42A42C1C400A8B0E0 /* NetworkManagerTests.swift */; };
 		FBAE44AD2A04A13000136825 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAE44AC2A04A13000136825 /* NetworkManager.swift */; };
 		FBD5EBB42A00C5910028F90B /* MyDiary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD5EBB32A00C5910028F90B /* MyDiary.swift */; };
 		FBD5EBB62A00C5B50028F90B /* DiaryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBD5EBB52A00C5B40028F90B /* DiaryProtocol.swift */; };
@@ -68,6 +70,8 @@
 		FB17B91F29FA5A0A007236A2 /* extension + UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension + UITextView.swift"; sourceTree = "<group>"; };
 		FB3C3CBE2A42BEA500A8B0E0 /* DiaryTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = DiaryTests.xctestplan; sourceTree = "<group>"; };
 		FB3C3CC02A42BF6500A8B0E0 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
+		FB3C3CC22A42C0E800A8B0E0 /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
+		FB3C3CC42A42C1C400A8B0E0 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
 		FBAE44AC2A04A13000136825 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		FBAE44AE2A04C64500136825 /* Diary version2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Diary version2.xcdatamodel"; sourceTree = "<group>"; };
 		FBD5EBB32A00C5910028F90B /* MyDiary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDiary.swift; sourceTree = "<group>"; };
@@ -199,8 +203,10 @@
 		FBFDD48129F65D35007EF5B7 /* DiaryTests */ = {
 			isa = PBXGroup;
 			children = (
+				FB3C3CC42A42C1C400A8B0E0 /* NetworkManagerTests.swift */,
 				FB3C3CC02A42BF6500A8B0E0 /* CoreDataManagerTests.swift */,
 				FBFDD48229F65D35007EF5B7 /* DiaryTests.swift */,
+				FB3C3CC22A42C0E800A8B0E0 /* MockURLProtocol.swift */,
 			);
 			path = DiaryTests;
 			sourceTree = "<group>";
@@ -377,6 +383,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB3C3CC52A42C1C400A8B0E0 /* NetworkManagerTests.swift in Sources */,
+				FB3C3CC32A42C0E900A8B0E0 /* MockURLProtocol.swift in Sources */,
 				FB3C3CC12A42BF6500A8B0E0 /* CoreDataManagerTests.swift in Sources */,
 				FBFDD48329F65D35007EF5B7 /* DiaryTests.swift in Sources */,
 			);

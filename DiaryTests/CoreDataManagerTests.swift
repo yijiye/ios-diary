@@ -118,4 +118,3 @@ final class CoreDataManagerTests: XCTestCase {
         XCTAssertEqual(result.title, expectation)
     }
 }
-

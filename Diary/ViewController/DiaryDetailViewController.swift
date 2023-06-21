@@ -25,6 +25,8 @@ final class DiaryDetailViewController: UIViewController, CLLocationManagerDelega
     private var weatherState: String?
     private var icon: String?
     
+    private let networkManager = NetworkManager()
+    
     private lazy var diaryTextView: UITextView = {
         let textView = UITextView()
         
@@ -289,7 +291,7 @@ final class DiaryDetailViewController: UIViewController, CLLocationManagerDelega
               let longitude = self.longitude else { return }
         
         let information = WeatherEndpoint.weatherInformation(latitude: latitude, longitude: longitude)
-        NetworkManager.shared.startLoad(endPoint: information, returnType: WeatherInformation.self) {
+        networkManager.startLoad(endPoint: information, returnType: WeatherInformation.self) {
             switch $0 {
             case .failure(let error):
                 DispatchQueue.main.async {

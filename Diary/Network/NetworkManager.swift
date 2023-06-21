@@ -7,13 +7,16 @@
 
 import UIKit
 
-final class NetworkManager {
-    static let shared = NetworkManager()
-    private init() { }
+struct NetworkManager {
+    let urlSession: URLSession
+    
+    init(urlSession: URLSession = URLSession.shared) {
+        self.urlSession = urlSession
+    }
     
     func startLoad<Element: Decodable>(endPoint: WeatherEndpoint, returnType: Element.Type, completion: @escaping (Result<Element, DiaryError>) -> Void) {
         guard let urlRequest = endPoint.createURLRequestForGET() else { return }
-        let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+        let task = urlSession.dataTask(with: urlRequest) { data, response, error in
             if error != nil {
                 completion(.failure(.networkUnknown))
                 return
@@ -46,7 +49,7 @@ final class NetworkManager {
     
     func imageLoad(endPoint: WeatherEndpoint, completion: @escaping (Result<Data, DiaryError>) -> Void) {
         guard let urlRequest = endPoint.createURLRequestForGET() else { return }
-        let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+        let task = urlSession.dataTask(with: urlRequest) { data, response, error in
             if error != nil {
                 completion(.failure(.networkUnknown))
                 return
