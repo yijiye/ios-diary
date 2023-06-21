@@ -20,6 +20,7 @@ extension DiaryCoreData {
     @NSManaged public var date: Double
     @NSManaged public var weatherState: String?
     @NSManaged public var icon: String?
+    @NSManaged public var id: UUID?
 }
 
 extension DiaryCoreData: Identifiable {

@@ -15,7 +15,7 @@ final class DiaryTests: XCTestCase {
     override func setUpWithError() throws {
        try super.setUpWithError()
         
-        sut = Decoder.parseJSON(fileName: fileName, returnType: [SampleDiary].self)
+        sut = try Decoder.parseJSON(fileName: fileName, returnType: [SampleDiary].self)
     }
 
     override func tearDownWithError() throws {

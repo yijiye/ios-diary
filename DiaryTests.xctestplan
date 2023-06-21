@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "2E490924-575E-4542-AFF3-5661C1956F2B",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Diary.xcodeproj",
+        "identifier" : "FBFDD47F29F65D35007EF5B7",
+        "name" : "DiaryTests"
+      }
+    }
+  ],
+  "version" : 1
+}

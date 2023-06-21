@@ -173,7 +173,8 @@ extension DiaryListViewController: UITableViewDataSource {
 extension DiaryListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let diary = myDiary,
-              let fetchedDiary = CoreDataManager.shared.read(key: diary[indexPath.row].objectID) else { return }
+              let id = diary[indexPath.row].id,
+              let fetchedDiary = CoreDataManager.shared.read(id: id) else { return }
         
         let diaryDetailViewController = DiaryDetailViewController(fetchedDiary: fetchedDiary, mode: .edit, titleText: fetchedDiary.title, bodyText: fetchedDiary.body)
         
@@ -199,8 +200,8 @@ extension DiaryListViewController: UITableViewDelegate {
         let delete = UIContextualAction(style: .normal, title: "삭제") { [weak self] (_, _, success: @escaping (Bool) -> Void) in
             
             self?.showDeleteAlert(handler: { _ in
-                let key = diary[indexPath.row].objectID
-                CoreDataManager.shared.delete(id: key)
+                guard let id = diary[indexPath.row].id else { return }
+                CoreDataManager.shared.delete(id: id)
                 self?.setUpMyDiary()
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 

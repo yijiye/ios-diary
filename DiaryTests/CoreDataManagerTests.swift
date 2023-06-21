@@ -12,12 +12,16 @@ final class CoreDataManagerTests: XCTestCase {
     
     var sut: CoreDataManager!
     let diaryFileName = "sample"
-    var sampleDiary: [SampleDiary] = []
+    var sampleDiary: [MyDiary] = []
     
     override func setUpWithError() throws {
         try super.setUpWithError()
         sut = CoreDataManager.shared
-        sampleDiary = try Decoder.parseJSON(fileName: diaryFileName, returnType: [SampleDiary].self) ?? []
+        sut.deleteAll()
+        let diaryA = MyDiary(id: UUID(), title: "오늘일기A", body: "내용없음", createdDate: Double(Date().timeIntervalSince1970))
+        let diaryB = MyDiary(id: UUID(), title: "오늘일기B", body: "내용없음", createdDate: Double(Date().timeIntervalSince1970))
+        let diaryC = MyDiary(id: UUID(), title: "오늘일기C", body: "내용없음", createdDate: Double(Date().timeIntervalSince1970))
+        sampleDiary = [diaryA, diaryB, diaryC]
     }
 
     override func tearDownWithError() throws {
@@ -28,12 +32,15 @@ final class CoreDataManagerTests: XCTestCase {
     
     func test_create매서드_성공시_read매서드호출결과는_nil이_아니다() {
         // given
+        sampleDiary.forEach {
+            sut.create(diary: $0)
+        }
         guard let firstSampleDiary = sampleDiary.first else { return }
-        sut.create(diary: firstSampleDiary)
+        let id = firstSampleDiary.id
         
         // when
-        let result = sut.read(key: firstSampleDiary.title)
-
+        let result = sut.read(id: id)
+        
         // then
         XCTAssertNotNil(result)
     }
@@ -53,14 +60,14 @@ final class CoreDataManagerTests: XCTestCase {
         XCTAssertEqual(expectation, result)
     }
     
-    func test_create메서드_성공시_Diary에저장된첫번째값의_title은_똘기떵이호치새초미자축인묘이다() {
+    func test_create메서드_성공시_Diary에저장된첫번째값의_title은_오늘일기A이다() {
         // given
         guard let firstSampleDiary = sampleDiary.first else { return }
         sut.create(diary: firstSampleDiary)
-        let expectation = "똘기떵이호치새초미자축인묘"
+        let expectation = "오늘일기A"
         
         // when
-        guard let result = sut.read(key: firstSampleDiary.title)?.title else { return }
+        guard let result = sut.read(id: firstSampleDiary.id)?.title else { return }
         
         // then
         XCTAssertEqual(result, expectation)
@@ -73,23 +80,23 @@ final class CoreDataManagerTests: XCTestCase {
         
         // when
         sut.deleteAll()
-        let result = sut.read(key: firstSampleDiary.title)
+        let result = sut.read(id: firstSampleDiary.id)
         
         // then
         XCTAssertNil(result)
     }
     
-    func test_delete메서드로_첫번째sampleDiary를_삭제했을시_다음의_첫번째sampleDiary는_드라고요롱이마초미미진사오미이다 () {
+    func test_delete메서드로_첫번째sampleDiary를_삭제했을시_다음의_첫번째sampleDiary는_오늘일기B이다 () {
         // given
         sampleDiary.forEach {
             sut.create(diary: $0)
         }
-        let expectation = "드라고요롱이마초미미진사오미"
+        let expectation = "오늘일기B"
     
         // when
         guard let firstSampleDiary = sampleDiary.first else { return }
-        sut.delete(key: firstSampleDiary.title)
-        guard let result = sut.read(key: firstSampleDiary.title)?.title else { return }
+        sut.delete(id: firstSampleDiary.id)
+        guard let result = sut.read(id: firstSampleDiary.id)?.title else { return }
         
         // then
         XCTAssertEqual(result, expectation)
@@ -99,13 +106,16 @@ final class CoreDataManagerTests: XCTestCase {
         // given
         guard let firstSampleDiary = sampleDiary.first else { return }
         sut.create(diary: firstSampleDiary)
-        let expectation = "드라고요롱이마초미미진사오미"
+        let id = firstSampleDiary.id
+        print(id)
+        let expectation = "오늘일기B"
         
         // when
-        sut.update(key: firstSampleDiary.title, diary: sampleDiary[1])
-        guard let result = sut.read(key: firstSampleDiary.title)?.title else { return }
+        sut.update(id: id, diary: sampleDiary[1])
+        guard let result = sut.read(id: id) else { return }
         
         // then
-        XCTAssertEqual(result, expectation)
+        XCTAssertEqual(result.title, expectation)
     }
 }
+

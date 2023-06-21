@@ -200,8 +200,8 @@ final class DiaryDetailViewController: UIViewController, CLLocationManagerDelega
                                       defaultTitle: "취소",
                                       destructiveTitle: "삭제",
                                       destructiveHandler: { _ in
-            guard let key = self.fetchedDiary?.objectID else { return }
-            CoreDataManager.shared.delete(id: key)
+            guard let id = self.fetchedDiary?.id else { return }
+            CoreDataManager.shared.delete(id: id)
             self.navigationController?.popViewController(animated: true)
         })
     }
@@ -257,15 +257,15 @@ final class DiaryDetailViewController: UIViewController, CLLocationManagerDelega
         switch mode {
         case .edit:
             guard let date = fetchedDiary?.date,
-                  let key = fetchedDiary?.objectID else { return }
+                  let id = fetchedDiary?.id else { return }
             
             if let weatherState = self.weatherState,
                let icon = self.icon {
-                let diary = MyDiary(title: titleText, body: bodyText, createdDate: date, weatherState: weatherState, icon: icon)
-                CoreDataManager.shared.update(key: key, diary: diary)
+                let diary = MyDiary(id: UUID(), title: titleText, body: bodyText, createdDate: date, weatherState: weatherState, icon: icon)
+                CoreDataManager.shared.update(id: id, diary: diary)
             } else {
-                let diary = MyDiary(title: titleText, body: bodyText, createdDate: date)
-                CoreDataManager.shared.update(key: key, diary: diary)
+                let diary = MyDiary(id: UUID(), title: titleText, body: bodyText, createdDate: date)
+                CoreDataManager.shared.update(id: id, diary: diary)
             }
             
         case .create:
@@ -273,10 +273,10 @@ final class DiaryDetailViewController: UIViewController, CLLocationManagerDelega
             
             if let weatherState = self.weatherState,
                let icon = self.icon {
-                let diary = MyDiary(title: titleText, body: bodyText, createdDate: today, weatherState: weatherState, icon: icon)
+                let diary = MyDiary(id: UUID(), title: titleText, body: bodyText, createdDate: today, weatherState: weatherState, icon: icon)
                 CoreDataManager.shared.create(diary: diary)
             } else {
-                let diary = MyDiary(title: titleText, body: bodyText, createdDate: today)
+                let diary = MyDiary(id: UUID(), title: titleText, body: bodyText, createdDate: today)
                 CoreDataManager.shared.create(diary: diary)
             }
         }

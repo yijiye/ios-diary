@@ -21,6 +21,7 @@ final class CoreDataManager {
               let storage = NSManagedObject(entity: entity, insertInto: self.context) as? DiaryCoreData else { return }
         
         setValue(at: storage, diary: diary)
+        storage.setValue(diary.id, forKey: "id")
         save()
     }
     
@@ -35,9 +36,9 @@ final class CoreDataManager {
         }
     }
     
-    func read(key: NSManagedObjectID) -> DiaryCoreData? {
+    func read(id: UUID) -> DiaryCoreData? {
         guard let context = self.context else { return nil }
-        let filter = filteredDataRequest(id: key)
+        let filter = filteredDataRequest(id: id)
         
         do {
             let data = try context.fetch(filter)
@@ -47,8 +48,8 @@ final class CoreDataManager {
         }
     }
     
-    func update(key: NSManagedObjectID, diary: DiaryProtocol) {
-        guard let fetchedData = read(key: key) else { return }
+    func update(id: UUID, diary: DiaryProtocol) {
+        guard let fetchedData = read(id: id) else { return }
         
         setValue(at: fetchedData, diary: diary)
         save()
@@ -67,10 +68,10 @@ final class CoreDataManager {
         }
     }
     
-    func delete(id: NSManagedObjectID) {
+    func delete(id: UUID) {
         guard let context = self.context else { return }
         let request: NSFetchRequest<NSFetchRequestResult> = DiaryCoreData.fetchRequest()
-        request.predicate = NSPredicate(format: "SELF == %@", id)
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
         let delete = NSBatchDeleteRequest(fetchRequest: request)
         
         do {
@@ -80,9 +81,9 @@ final class CoreDataManager {
         }
     }
     
-    private func filteredDataRequest(id: NSManagedObjectID) -> NSFetchRequest<NSManagedObject> {
+    private func filteredDataRequest(id: UUID) -> NSFetchRequest<NSManagedObject> {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "DiaryCoreData")
-        fetchRequest.predicate = NSPredicate(format: "SELF == %@", id)
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
         
         return fetchRequest
     }
